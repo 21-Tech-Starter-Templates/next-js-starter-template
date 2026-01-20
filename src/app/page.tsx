@@ -1,0 +1,13 @@
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth';
+import { LoginPage } from '@/components/auth/login-page';
+
+export default async function Page() {
+  const session = await auth();
+
+  if (session?.user) {
+    redirect('/dashboard');
+  }
+
+  return <LoginPage />;
+}

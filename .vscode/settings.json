@@ -1,0 +1,25 @@
+{
+  // Enable Prettier as the default formatter and format on save
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // Enable ESLint auto-fix on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // TypeScript validation
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": true,
+
+  // Tailwind CSS IntelliSense
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "tailwindCSS.lint.suggestCanonicalClasses": "ignore",
+
+  // TypeScript error suppression
+  "typescript.reportStyleChecksAsWarnings": false,
+  "typescript.preferences.includePackageJsonAutoImports": "on"
+}
