@@ -60,7 +60,7 @@ export const navItems: NavItem[] = [
     items: [
       {
         title: 'Dzongkhag',
-        url: '/dashboard/dzongkhag',
+        url: '/dashboard/master/dzongkhag',
         shortcut: ['m', 'm']
       }
     ]
