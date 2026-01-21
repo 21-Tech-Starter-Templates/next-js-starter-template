@@ -1,90 +1,86 @@
+// Protecting routes with next-auth
+// https://next-auth.js.org/configuration/nextjs#middleware
+// https://nextjs.org/docs/app/building-your-application/routing/middleware
+
+import NextAuth from 'next-auth';
+import authConfig from './auth.config';
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
 
-// Define public routes that don't require authentication
-const publicRoutes = [
-  '/',
-  '/api/auth/signin',
-  '/api/auth/callback',
-  '/api/auth/signout',
-  '/api/auth/session',
-  '/api/auth/providers',
-  '/api/auth/csrf'
-];
+const { auth } = NextAuth(authConfig);
 
-// Define protected routes that require authentication
-const protectedRoutes = ['/dashboard'];
+export default auth((req) => {
+  const isAuthenticated = !!req.auth;
+  const { pathname } = req.nextUrl;
 
-export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // Skip proxy for static files and Next.js internals
+  // Skip middleware for static files, API routes, and assets
   if (
     pathname.startsWith('/_next') ||
-    pathname.startsWith('/api/auth') ||
+    pathname.startsWith('/api') ||
     pathname.startsWith('/assets') ||
-    pathname.match(/\.(ico|png|jpg|jpeg|svg|gif|webp|css|js|woff2?)$/)
+    pathname.match(/\.(ico|png|jpg|jpeg|svg|gif|webp|css|js)$/)
   ) {
     return NextResponse.next();
   }
 
-  // Get the token to check authentication status
-  const token = await getToken({
-    req: request,
-    secret: process.env.NEXTAUTH_SECRET
-  });
+  // If authenticated and on root, redirect to dashboard
+  if (isAuthenticated && pathname === '/') {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
+  }
 
-  const isAuthenticated = !!token;
-  const isPublicRoute = publicRoutes.some(
-    (route) => pathname === route || pathname.startsWith(route)
-  );
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
+  // If not authenticated and trying to access dashboard, redirect to login
+  if (!isAuthenticated && pathname.startsWith('/dashboard')) {
+    const url = new URL('/', req.url);
+    const redirectResponse = NextResponse.redirect(url);
+    // Prevent caching of this redirect
+    redirectResponse.headers.set(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate'
+    );
+    return redirectResponse;
+  }
 
-  // Log authentication status for debugging
-  console.log(`[Proxy] ${pathname} - Authenticated: ${isAuthenticated}`);
+  // Allow request to proceed
+  return NextResponse.next();
+});
 
-  // Allow access to public routes
-  if (isPublicRoute) {
+// Named export for Next.js 16 compatibility
+export const proxy = auth((req) => {
+  const isAuthenticated = !!req.auth;
+  const { pathname } = req.nextUrl;
+
+  // Skip middleware for static files, API routes, and assets
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/assets') ||
+    pathname.match(/\.(ico|png|jpg|jpeg|svg|gif|webp|css|js)$/)
+  ) {
     return NextResponse.next();
   }
 
-  // Redirect unauthenticated users trying to access protected routes
-  if (isProtectedRoute && !isAuthenticated) {
-    const signInUrl = new URL('/', request.url);
-    signInUrl.searchParams.set('callbackUrl', request.url);
-    return NextResponse.redirect(signInUrl);
+  // If authenticated and on root, redirect to dashboard
+  if (isAuthenticated && pathname === '/') {
+    return NextResponse.redirect(new URL('/dashboard', req.url));
   }
 
-  // Check token expiry if authenticated
-  if (isAuthenticated && token) {
-    const now = Math.floor(Date.now() / 1000);
-    const tokenExpiry = token.tokenExpiry as number;
-
-    if (tokenExpiry && tokenExpiry <= now) {
-      // Token expired, redirect to sign in
-      const signInUrl = new URL('/', request.url);
-      signInUrl.searchParams.set('callbackUrl', request.url);
-      signInUrl.searchParams.set('error', 'SessionExpired');
-      return NextResponse.redirect(signInUrl);
-    }
+  // If not authenticated and trying to access dashboard, redirect to login
+  if (!isAuthenticated && pathname.startsWith('/dashboard')) {
+    const url = new URL('/', req.url);
+    const redirectResponse = NextResponse.redirect(url);
+    // Prevent caching of this redirect
+    redirectResponse.headers.set(
+      'Cache-Control',
+      'no-store, no-cache, must-revalidate'
+    );
+    return redirectResponse;
   }
 
-  // Allow the request to continue
+  // Allow request to proceed
   return NextResponse.next();
-}
-
+});
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api/auth (NextAuth.js API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-     */
-    '/((?!api/auth|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'
+    '/dashboard/:path*', // protected
+    '/' // public
   ]
 };

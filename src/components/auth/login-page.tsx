@@ -139,18 +139,12 @@ export function LoginPage() {
           </CardContent>
 
           <CardFooter className="flex flex-col space-y-4">
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="mt-4 w-full" disabled={isLoading}>
               {isLoading && (
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
               Sign in
             </Button>
-
-            <div className="text-center">
-              <p className="text-muted-foreground text-sm">
-                Demo credentials: admin@example.com / password123
-              </p>
-            </div>
           </CardFooter>
         </form>
       </Card>
