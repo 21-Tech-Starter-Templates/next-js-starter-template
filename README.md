@@ -32,31 +32,18 @@ This template uses the following stack:
 
 ## Features
 
-- 🧱 Pre-built **admin dashboard layout** (sidebar, header, content area)
-
-- 📊 **Analytics overview** page with cards and charts
+- 🧱 Pre-built **admin dashboard layout** (sidebar, header)
 
 - 📋 **Data tables** with server-side search, filter & pagination
 
-- 🔐 **Authentication** & user management via Clerk
+- 🔐 **Authentication**
 
-- 🏢 **Multi-tenant workspaces** with Clerk Organizations (create, switch, manage teams)
-
-- 💳 **Billing & subscriptions** with Clerk Billing for B2B (plan management, feature gating)
-
-- 🔒 **RBAC navigation system** - Fully client-side navigation filtering based on organization, permissions, and roles
-
-- ℹ️ **Infobar component** to show helpful tips, status messages, or contextual info on any page
+- 🔒 **RBAC navigation system** - Fully client-side navigation filtering based on userType,permissions, and roles
 
 - 🧩 **Shadcn UI components** with Tailwind CSS styling
 
 - 🧠 Feature-based folder structure for scalable projects
-
-- ⚙️ Ready for **SaaS dashboards**, internal tools, and client admin panels
-
-## Pages
-
-                                                         |
+  |
 
 ## Getting Started
 
@@ -66,7 +53,7 @@ This template uses the following stack:
 Clone the repo:
 
 ```
-git clone https://github.com/Kiranism/next-shadcn-dashboard-starter.git
+git clone https://github.com/21-Tech-Starter-Templates/next-js-starter-template.git
 ```
 
 - `bun install`
