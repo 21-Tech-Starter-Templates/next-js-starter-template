@@ -6,6 +6,17 @@ import CredentialProvider from 'next-auth/providers/credentials';
 
 const API_URL = `${process.env.AUTH_SERVICE}`;
 
+// Validate required environment variables
+if (!process.env.AUTH_SERVICE) {
+  throw new Error('AUTH_SERVICE environment variable is required');
+}
+
+if (!process.env.AUTH_SECRET && !process.env.NEXTAUTH_SECRET) {
+  throw new Error(
+    'AUTH_SECRET or NEXTAUTH_SECRET environment variable is required'
+  );
+}
+
 // Session durations
 const SESSION_MAX_AGE_REMEMBER = 7 * 24 * 60 * 60; // 7 days when "Remember Me" checked
 const SESSION_MAX_AGE_DEFAULT = 24 * 60 * 60; // 24 hours when "Remember Me" unchecked
@@ -42,6 +53,8 @@ const authConfig = {
       },
       async authorize(credentials, req) {
         try {
+          console.log('🔐 Attempting login for:', credentials?.email);
+
           const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -52,16 +65,39 @@ const authConfig = {
           });
 
           if (!response.ok) {
+            console.log('🔐 Login failed - HTTP status:', response.status);
             return null;
           }
 
           const data = await response.json();
+
+          console.log('🔐 Login successful for:', data.user?.email);
+          console.log(
+            '🔍 User roles:',
+            data.user?.roles?.map((r: any) => r.name)
+          );
+          console.log('🔍 User abilities:', data.user?.ability);
 
           if (data?.user && data?.token) {
             const rememberMe = credentials?.rememberMe === 'true';
             const sessionDuration = rememberMe
               ? SESSION_MAX_AGE_REMEMBER
               : SESSION_MAX_AGE_DEFAULT;
+
+            // Validate required user data structure
+            if (!data.user.roles || !Array.isArray(data.user.roles)) {
+              console.warn(
+                '🔍 User missing roles array, defaulting to empty array'
+              );
+              data.user.roles = [];
+            }
+
+            if (!data.user.ability || !Array.isArray(data.user.ability)) {
+              console.warn(
+                '🔍 User missing ability array, defaulting to empty array'
+              );
+              data.user.ability = [];
+            }
 
             // Store tokens, sessionId, and rememberMe preference in user object for JWT callback
             return {
@@ -76,6 +112,7 @@ const authConfig = {
 
           return null;
         } catch (error) {
+          console.error('🔐 Login error:', error);
           return null;
         }
       }
@@ -133,9 +170,14 @@ const authConfig = {
               : SESSION_MAX_AGE_DEFAULT;
             token.tokenExpiry = Math.floor(Date.now() / 1000) + sessionDuration;
           } else {
+            console.log(
+              '🔐 Token refresh failed - HTTP status:',
+              response.status
+            );
             return null;
           }
         } catch (error) {
+          console.error('🔐 Token refresh error:', error);
           return null;
         }
       } else if (shouldRefresh && !token.refreshToken) {
@@ -151,7 +193,6 @@ const authConfig = {
       session.sessionId = token.sessionId as string; // Redis session ID for activity tracking
       session.tokenExpiry = token.tokenExpiry as number;
       session.rememberMe = token.rememberMe as boolean;
-
       return session;
     }
   }
