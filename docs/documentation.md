@@ -5,22 +5,21 @@ A comprehensive admin dashboard starter template built with Next.js 16, featurin
 ## Table of Contents
 
 1. [Overview](#overview)
-2. [Why Use This Template](#why-use-this-template)
-3. [Getting Started](#getting-started)
-4. [Project Architecture](#project-architecture)
-5. [Authentication System](#authentication-system)
-6. [Role-Based Access Control](#role-based-access-control)
-7. [Adding New Features](#adding-new-features)
-8. [Adding New Pages](#adding-new-pages)
-9. [Components & UI](#components--ui)
-10. [Forms & Data Management](#forms--data-management)
-11. [Server Actions](#server-actions)
-12. [TanStack Table](#tanstack-table)
-13. [URL State Management (nuqs)](#url-state-management-nuqs)
-14. [Development Workflow](#development-workflow)
-15. [Deployment](#deployment)
-16. [Best Practices](#best-practices)
-17. [Troubleshooting](#troubleshooting)
+2. [Getting Started](#getting-started)
+3. [Project Architecture](#project-architecture)
+4. [Authentication System](#authentication-system)
+5. [Role-Based Access Control](#role-based-access-control)
+6. [Adding New Features](#adding-new-features)
+7. [Adding New Pages](#adding-new-pages)
+8. [Components & UI](#components--ui)
+9. [Forms & Data Management](#forms--data-management)
+10. [Server Actions](#server-actions)
+11. [TanStack Table](#tanstack-table)
+12. [URL State Management (nuqs)](#url-state-management-nuqs)
+13. [Development Workflow](#development-workflow)
+14. [Deployment](#deployment)
+15. [Best Practices](#best-practices)
+16. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -51,37 +50,6 @@ This is a production-ready **admin dashboard starter template** that provides a 
 | **State Management** | Zustand + nuqs            | Global state + URL state              |
 | **Commands**         | kbar                      | Command+K interface                   |
 | **Code Quality**     | ESLint + Prettier + Husky | Linting, formatting, pre-commit hooks |
-
-## Why Use This Template
-
-### 🚀 For Rapid Development
-
-- **Skip the Setup**: Everything is pre-configured and ready to use
-- **Best Practices**: Built-in patterns for scalable application architecture
-- **Type Safety**: Full TypeScript support with proper type definitions
-- **Modern Patterns**: Uses latest React and Next.js patterns (Server Components, Server Actions)
-
-### 🏢 For Business Applications
-
-- **Enterprise Ready**: Role-based access control, authentication, and security
-- **Scalable Architecture**: Feature-based folder structure that grows with your project
-- **Data Management**: Advanced table functionality with server-side operations
-- **Admin Dashboards**: Perfect for internal tools, SaaS apps, and admin panels
-
-### 👩‍💻 For Developer Experience
-
-- **Hot Reload**: Fast development with Next.js dev server
-- **Code Quality**: Automated linting, formatting, and pre-commit hooks
-- **Component Library**: Rich set of pre-built, customizable components
-- **Documentation**: Comprehensive docs and examples
-
-### 📊 Ideal Use Cases
-
-- **SaaS Applications**: Multi-tenant apps with role-based access
-- **Admin Panels**: Internal tools for managing data and users
-- **E-commerce Backends**: Product management, order processing
-- **CMS Systems**: Content management with user permissions
-- **Analytics Dashboards**: Data visualization and reporting
 
 ## Getting Started
 
