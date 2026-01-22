@@ -159,7 +159,6 @@ next-js-starter-template/
 ├── types/                          # Global type definitions
 ├── .env.example.txt               # Environment variables template
 ├── components.json                # Shadcn UI configuration
-├── tailwind.config.js            # Tailwind CSS configuration
 ├── tsconfig.json                 # TypeScript configuration
 └── package.json                  # Dependencies and scripts
 ```
