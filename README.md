@@ -56,11 +56,11 @@ Clone the repo:
 git clone https://github.com/21-Tech-Starter-Templates/next-js-starter-template.git
 ```
 
-- `bun install`
+- `pnpm install`
 - Create a `.env.local` file by copying the example environment file:
   `cp env.example.txt .env.local`
 - Add the required environment variables to the `.env.local` file.
-- `bun run dev`
+- `pnpm run dev`
 
 ##### Environment Configuration Setup
 
