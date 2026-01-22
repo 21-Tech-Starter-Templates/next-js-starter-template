@@ -15,20 +15,29 @@ It gives you a production-ready **dashboard UI** with authentication, charts, ta
 
 This template uses the following stack:
 
-- Framework - [Next.js 16](https://nextjs.org/16)
-- Language - [TypeScript](https://www.typescriptlang.org)
-- Auth - [NextAuth.js](https://next-auth.js.org/)
-- Styling - [Tailwind CSS v4](https://tailwindcss.com)
-- Components - [Shadcn-ui](https://ui.shadcn.com)
-- Schema Validations - [Zod](https://zod.dev)
-- State Management - [Zustand](https://zustand-demo.pmnd.rs)
-- Search params state manager - [Nuqs](https://nuqs.47ng.com/)
-- Tables - [Tanstack Data Tables](https://ui.shadcn.com/docs/components/data-table) • [Dice table](https://www.diceui.com/docs/components/data-table)
-- Forms - [React Hook Form](https://ui.shadcn.com/docs/components/form)
-- Command+k interface - [kbar](https://kbar.vercel.app/)
-- Linting - [ESLint](https://eslint.org)
-- Pre-commit Hooks - [Husky](https://typicode.github.io/husky/)
-- Formatting - [Prettier](https://prettier.io)
+- **Framework** - [Next.js 16](https://nextjs.org/16) - The React framework for production with App Router, server components, and built-in optimizations
+- **Language** - [TypeScript](https://www.typescriptlang.org) - Type-safe JavaScript with excellent IDE support and compile-time error catching
+
+- **🔐 Auth** - [NextAuth.js](https://next-auth.js.org/) - Complete authentication solution with multiple providers (Google, GitHub, credentials), built-in security features, and seamless Next.js integration
+
+- **🎨 Styling** - [Tailwind CSS v4](https://tailwindcss.com) - Utility-first CSS framework with built-in design system, responsive utilities, dark mode support, and optimal performance through tree-shaking
+
+- **🧩 Components** - [Shadcn-ui](https://ui.shadcn.com) - High-quality, accessible React components built on Radix UI primitives. Copy-pastable rather than installed dependencies, giving you full control over the code
+
+- **✅ Schema Validations** - [Zod](https://zod.dev) - TypeScript-first schema validation with runtime type checking, type inference, and seamless integration with forms for type-safe data validation
+
+- **🧠 State Management** - [Zustand](https://zustand-demo.pmnd.rs) - Lightweight (2.5kb), simple state management with minimal boilerplate, TypeScript support, and no providers required
+
+- **🔍 Search Params State Manager** - [Nuqs](https://nuqs.47ng.com/) - URL-synchronized state management for shareable URLs, browser navigation support, and server-side rendering compatibility
+
+- **📊 Tables** - [Tanstack Data Tables](https://ui.shadcn.com/docs/components/data-table) • [Dice table](https://www.diceui.com/docs/components/data-table) - Headless table logic with advanced sorting, filtering, pagination, and server-side data handling
+
+- **📝 Forms** - [React Hook Form](https://ui.shadcn.com/docs/components/form) - Performant forms with minimal re-renders, built-in validation, and excellent TypeScript support integrated with Zod schemas
+
+- **⌘ Command+k interface** - [kbar](https://kbar.vercel.app/) - Command palette interface for better user experience and navigation
+- **🔧 Linting** - [ESLint](https://eslint.org) - Code quality and consistency enforcement
+- **🪝 Pre-commit Hooks** - [Husky](https://typicode.github.io/husky/) - Git hooks for automated code quality checks
+- **💅 Formatting** - [Prettier](https://prettier.io) - Consistent code formatting across the project
 
 ## Features
 
@@ -70,15 +79,3 @@ To configure the environment for this project, refer to the `env.example.txt` fi
 > After cloning or forking the repository, be cautious when pulling or syncing with the latest changes, as this may result in breaking conflicts.
 
 Cheers! 🥂
-
-<!--
-
-SEO keywords:
-
-nextjs admin dashboard, nextjs dashboard template, shadcn ui dashboard,
-
-admin dashboard starter, dashboard ui template, nextjs shadcn admin panel,
-
-react admin dashboard, tailwind css admin dashboard
-
--->
