@@ -66,12 +66,6 @@ git clone https://github.com/21-Tech-Starter-Templates/next-js-starter-template.
 
 To configure the environment for this project, refer to the `env.example.txt` file. This file contains the necessary environment variables required for authentication and error tracking.
 
-##### Clerk Setup
-
-For detailed instructions on configuring Clerk authentication (including organizations/workspaces/teams), please refer to [clerk_setup.md](./docs/clerk_setup.md).
-
-You should now be able to access the application at http://localhost:3000.
-
 > [!WARNING]
 > After cloning or forking the repository, be cautious when pulling or syncing with the latest changes, as this may result in breaking conflicts.
 
