@@ -63,6 +63,10 @@ Clone the repo:
 
 ```
 git clone https://github.com/21-Tech-Starter-Templates/next-js-starter-template.git
+OR
+Get inside your project directory
+ex. cd your project
+npx degit https://github.com/21-Tech-Starter-Templates/next-js-starter-template.git ./ --force
 ```
 
 - `pnpm install`
